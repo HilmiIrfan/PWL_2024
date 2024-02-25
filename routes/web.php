@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\PageController;
+use App\Http\Controllers\WelcomeController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -17,16 +19,16 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-/*Basic Routing*/
+/*Basic Routing
 Route::get('/hello', function(){
     return 'Hello World';
-});
+});*/
 
 Route::get('/world', function(){
     return 'World';
 });
 
-Route::get('/', function(){
+/*Route::get('/', function(){
     return 'Selamat Datang';
 });
 
@@ -86,3 +88,21 @@ View Routes
 Route::view('/welcome', 'welcome');
 Route::view('/welcome', 'welcome', ['name' => 'Taylor']);
 */
+
+
+/*Controller*/
+Route::get('/hello', [WelcomeController::class,'hello']);
+
+Route::get('/', [PageController::class, 'index']);
+
+Route::get('/about', [PageController::class, 'about']);
+
+
+/*Resource Controller*/
+use App\Http\Controllers\PhotoController;
+
+Route::resource('photos', PhotoController::class);
+
+Route::resource('photos', PhotoController::class)->only(['index', 'show']);
+
+Route::resource('photos', PhotoController::class)->except(['create', 'store', 'update', 'destroy']);
