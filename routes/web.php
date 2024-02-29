@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\PageController;
 use App\Http\Controllers\WelcomeController;
 use Illuminate\Support\Facades\Route;
@@ -93,10 +94,12 @@ Route::view('/welcome', 'welcome', ['name' => 'Taylor']);
 /*Controller*/
 Route::get('/hello', [WelcomeController::class,'hello']);
 
-Route::get('/', [PageController::class, 'index']);
+Route::get('/', [HomeController::class, 'index']);
 
-Route::get('/about', [PageController::class, 'about']);
+Route::get('/about', [HomeController::class, 'about']);
 
+Route::get('/articles{$id}', [HomeController::
+class, 'articles']);
 
 /*Resource Controller*/
 use App\Http\Controllers\PhotoController;
